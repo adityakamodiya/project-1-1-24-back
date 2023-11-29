@@ -7,7 +7,7 @@ import bcrypt from "bcrypt";
 let db;
 let dummy = []       
 const app = express()
-// let port = 8001
+let port = 8001;
 //aditya
 let j;
 
@@ -102,5 +102,5 @@ app.post('/receive',async(req,res)=>{
 connection
     .then((client) => {
         db = client.db(dbName)
-        // app.listen(port, () => console.log("server started at port " + port))
+        app.listen(port, () => console.log("server started at port " + port))
     })
