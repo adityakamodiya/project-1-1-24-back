@@ -4,26 +4,10 @@ import connection,{dbName} from './Connection.js'
 import bcrypt from "bcrypt";
 
 
-
-// const app = express()
-// app.use(express.json())
-// app.use(express.urlencoded({extended:true}))
-
-
-
-
-
-// connection.then(()=>{
-//    app.listen(8080,()=>{
-// console.log("started at 8080")
-//    }) 
-// })
-
-
 let db;
-let dummy = []
+let dummy = []       
 const app = express()
-let port = 8001
+// let port = 8001
 let j;
 
 const allowedOrigins = ['https://project-frontend-zbjj.onrender.com'];
@@ -117,5 +101,5 @@ app.post('/receive',async(req,res)=>{
 connection
     .then((client) => {
         db = client.db(dbName)
-        app.listen(port, () => console.log("server started at port " + port))
+        // app.listen(port, () => console.log("server started at port " + port))
     })
