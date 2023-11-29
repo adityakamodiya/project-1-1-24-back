@@ -26,7 +26,7 @@ const app = express()
 let port = 8001
 let j;
 
-const allowedOrigins = ['https://project-1-1-24-frontend.onrender.com'];
+const allowedOrigins = ['https://project-1-1-24-frontend.onrender.com/'];
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -42,7 +42,7 @@ app.use(cors({
 app.options('*', cors())
 
 app.use(express.json())
-app.use(cors({ origin: "https://project-1-1-24-frontend.onrender.com" }))
+app.use(cors({ origin: "https://project-1-1-24-frontend.onrender.com/" }))
 app.post('/receive',async(req,res)=>{
     let {username,age,city,gender} = req.body
     const hashedPassowrd = await bcrypt.hash(req.body.password, 10);
