@@ -37,7 +37,7 @@ app.post('/receive',async(req,res)=>{
         let save =await db.collection('users').insertOne({username,age,city,gender,hashedPassowrd})
         console.log(save)
     }
-    // console.log(go)   
+    
     console.log(hashedPassowrd)
     for(let i =0;i<go.length;i++){
         if(go[i].username == req.body.username)
