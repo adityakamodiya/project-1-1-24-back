@@ -10,8 +10,8 @@ const app = express()
 let port = 8001;
 //aditya
 let j;
-
-const allowedOrigins = ['https://project-frontend-zbjj.onrender.com'];
+// https://project-frontend-zbjj.onrender.com
+const allowedOrigins = ['http://localhost:3000'];
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -27,7 +27,8 @@ app.use(cors({
 app.options('*', cors())
 
 app.use(express.json())
-app.use(cors({ origin: "https://project-frontend-zbjj.onrender.com" }))
+// https://project-frontend-zbjj.onrender.com
+app.use(cors({ origin:"http://localhost:3000" }))
 app.post('/receive',async(req,res)=>{
     let {username,age,city,gender} = req.body
     const hashedPassowrd = await bcrypt.hash(req.body.password, 10);
@@ -61,10 +62,6 @@ app.post('/receive',async(req,res)=>{
 })
 
 
-// app.options("/",(req,res)=>{
-//     res.header("Access-control-Allow-Methods","POST")
-//     res.sendStatus(200);
-// })
 
     app.post('/login',async(req,res)=>{
         let {username,password} = req.body
@@ -99,6 +96,40 @@ app.post('/receive',async(req,res)=>{
                 
     })
     
+    app.get('/aaja',async(req,res)=>{
+        let go = await db.collection('saveimg').find().toArray()
+        res.send(go)
+    })
+    
+app.post('/profile',async(req,res)=>{
+    let {profileData,clickimg} = req.body
+    let go = await db.collection('userProfiles').find().toArray()
+    
+    for(let i =0;i<go.length;i++){
+        if(go[i].profileData == profileData){
+            console.log('got it')
+            db.collection('userProfiles').deleteOne({"_id":go[i]._id})
+            // go.deleteOne(go[i]._id);
+            // db.collection('uersProfiles').deleteOne(go[i]._id)
+            // console.log(go)
+            break
+            
+        }
+    }
+    let save = await db.collection('userProfiles').insertOne({profileData,clickimg})
+    // let go1 = await db.collection('userProfiles').find().toArray()
+    // console.log(go1)
+    // console.log(save)
+    res.send(save)
+
+
+})
+app.get('/myprofile',async(req,res)=>{
+    let go = await db.collection('userProfiles').find().toArray()
+    res.send(go)
+    
+})
+
 connection
     .then((client) => {
         db = client.db(dbName)
