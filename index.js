@@ -112,7 +112,7 @@ app.post('/profile',async(req,res)=>{
             // go.deleteOne(go[i]._id);
             // db.collection('uersProfiles').deleteOne(go[i]._id)
             // console.log(go)
-            break
+            break;
             
         }
     }
@@ -128,7 +128,7 @@ app.get('/myprofile',async(req,res)=>{
     let go = await db.collection('userProfiles').find().toArray()
     res.send(go)
     
-})
+}) 
 
 connection
     .then((client) => {
