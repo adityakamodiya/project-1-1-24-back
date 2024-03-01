@@ -11,7 +11,7 @@ let port = 8001;
 //aditya
 let j;
 // https://project-frontend-zbjj.onrender.com
-const allowedOrigins = ['http://localhost:3000'];
+const allowedOrigins = ['https://project-frontend-zbjj.onrender.com'];
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -25,10 +25,10 @@ app.use(cors({
   credentials: true,
 }));
 app.options('*', cors())
-
+// http://localhost:3000
 app.use(express.json())
-// https://project-frontend-zbjj.onrender.com
-app.use(cors({ origin:"http://localhost:3000" }))
+
+app.use(cors({ origin:"https://project-frontend-zbjj.onrender.com" }))
 app.post('/receive',async(req,res)=>{
     let {username,age,city,gender} = req.body
     const hashedPassowrd = await bcrypt.hash(req.body.password, 10);
@@ -101,7 +101,7 @@ app.post('/receive',async(req,res)=>{
         res.send(go)
     })
     
-app.post('/profile',async(req,res)=>{
+app.post('/Myprofile',async(req,res)=>{
     let {profileData,clickimg} = req.body
     let go = await db.collection('userProfiles').find().toArray()
     
@@ -124,8 +124,9 @@ app.post('/profile',async(req,res)=>{
 
 
 })
-app.get('/myprofile',async(req,res)=>{
+app.get('/WholeProfiles+',async(req,res)=>{
     let go = await db.collection('userProfiles').find().toArray()
+   console.log(go)
     res.send(go)
     
 }) 
